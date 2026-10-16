@@ -16,7 +16,7 @@ export class App {
   cart: Product[] = [];
 
   onAdd(product: Product): void {
-    this.cart.push(product); // ajoute le produit au bout du tableau
+    this.cart = [...this.cart, product]; // un nouveau tableau, à une nouvelle adresse
   }
 
   onClear(): void {
