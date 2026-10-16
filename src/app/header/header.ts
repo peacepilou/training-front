@@ -1,4 +1,5 @@
 import { Component, input, output } from '@angular/core';
+import { Product } from '../models/product.model'; // nouveau : le header manipule des produits
 
 @Component({
   imports: [],
@@ -7,6 +8,6 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './header.html',
 })
 export class Header {
-  count = input.required<number>();
+  cart = input.required<Product[]>(); // remplace count
   clear = output<void>(); // void : l'événement ne transporte rien
 }

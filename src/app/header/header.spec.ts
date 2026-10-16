@@ -12,7 +12,7 @@ describe('Header', () => {
 
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('count', 0);
+    fixture.componentRef.setInput('cart', []);
     await fixture.whenStable();
   });
 
