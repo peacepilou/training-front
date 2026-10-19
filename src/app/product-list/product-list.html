@@ -1,13 +1,13 @@
 <section class="product-list">
   <h2>Nos produits</h2>
 
-  @if (loading()) {
+  @if (store.loading()) {
     <div aria-label="Chargement du catalogue">
       @for (i of [1, 2, 3, 4]; track i) {
         <div class="skeleton"></div>
       }
     </div>
-  } @else if (error(); as message) {
+  } @else if (store.error(); as message) {
     <p class="error" role="alert">{{ message }}</p>
   } @else {
     <button (click)="filter.set('all')">Tous</button>
@@ -35,7 +35,7 @@
       }
     </ul>
 
-    @for (p of products(); track p.id) {
+    @for (p of store.products(); track p.id) {
       <app-product-card [product]="p" />
     }
   }
