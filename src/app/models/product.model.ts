@@ -14,3 +14,6 @@ export type ProductsResponse = {
   skip: number;
   limit: number;
 };
+
+// POST /products/add : ce que le formulaire envoie
+export type NewProduct = Omit<Product, 'id' | 'thumbnail' | 'availabilityStatus'>;

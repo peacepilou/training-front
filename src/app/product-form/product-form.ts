@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormField, FormRoot, form, min, minLength, required, validate } from '@angular/forms/signals';
+import { ProductApiService } from '../product-api.service';
+import { Product } from '../models/product.model';
 
 @Component({
   imports: [FormField, FormRoot, JsonPipe],
@@ -9,6 +11,8 @@ import { FormField, FormRoot, form, min, minLength, required, validate } from '@
   templateUrl: './product-form.html',
 })
 export class ProductForm {
+  private readonly productApi = inject(ProductApiService);
+
   product = signal({ title: '', price: 0, stock: 0 }); // le modèle : les valeurs du formulaire
 
   productForm = form(
@@ -27,12 +31,17 @@ export class ProductForm {
     { submission: { action: async () => this.send() } }, // lancée à l'envoi, si tout est valide
   );
 
-  sent = signal<{ title: string; price: number; stock: number } | null>(null); // le dernier produit prêt à partir
+  created = signal<Product | null>(null); // le dernier produit créé par DummyJSON
+  error = signal<string | null>(null);
 
   async send(): Promise<void> {
-    // ici, l'appel à l'API qui enregistre le produit : tu l'écris au chapitre suivant
-    this.sent.set(this.product());
-    this.product.set({ title: '', price: 0, stock: 0 });
-    this.productForm().reset(); // les champs redeviennent non touchés : les messages disparaissent
+    this.error.set(null); // on efface l'échec précédent
+    try {
+      this.created.set(await this.productApi.add(this.product())); // le modèle, c'est déjà le corps du POST
+      this.product.set({ title: '', price: 0, stock: 0 });
+      this.productForm().reset(); // les champs redeviennent non touchés : les messages disparaissent
+    } catch {
+      this.error.set("L'envoi a échoué. Réessaie dans un instant.");
+    }
   }
 }
