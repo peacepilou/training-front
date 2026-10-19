@@ -1,8 +1,9 @@
 import { Component, computed, input, output, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Product } from '../models/product.model'; // nouveau : le header manipule des produits
 
 @Component({
-  imports: [],
+  imports: [RouterLink], // le template de Header a le droit d'utiliser routerLink
   selector: 'app-header',
   styleUrl: './header.css',
   templateUrl: './header.html',
