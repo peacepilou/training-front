@@ -1,6 +1,18 @@
 <section class="product-list">
   <h2>Nos produits</h2>
 
+  <button (click)="showAll()">Tous</button>
+  <button (click)="showInStock()">Disponibles</button>
+  <button (click)="showLuxury()">Plus de 1 000 €</button>
+
+  <ul>
+    @for (product of visibleProducts; track product.id) {
+      <li>{{ product.title }} : {{ product.price }} €</li>
+    } @empty {
+      <li>Aucun produit à afficher</li>
+    }
+  </ul>
+
   <app-product-card />
   <app-product-card />
   <app-product-card />
