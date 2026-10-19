@@ -1,32 +1,38 @@
 <section class="product-list">
   <h2>Nos produits</h2>
 
-  <button (click)="filter.set('all')">Tous</button>
-  <button (click)="filter.set('inStock')">Disponibles</button>
-  <button (click)="filter.set('luxury')">Plus de 1 000 €</button>
+  @if (loading()) {
+    <p>Chargement du catalogue…</p>
+  } @else if (error(); as message) {
+    <p class="error">{{ message }}</p>
+  } @else {
+    <button (click)="filter.set('all')">Tous</button>
+    <button (click)="filter.set('inStock')">Disponibles</button>
+    <button (click)="filter.set('luxury')">Plus de 1 000 €</button>
 
-  <ul>
-    @for (product of visibleProducts(); track product.id) {
-      <li>
-        <a [routerLink]="['/products', product.id]">{{ product.title }}</a> : {{ product.price }} €
-        @switch (product.availabilityStatus) {
-          @case ('In Stock') {
-            <span>En stock</span>
+    <ul>
+      @for (product of visibleProducts(); track product.id) {
+        <li>
+          <a [routerLink]="['/products', product.id]">{{ product.title }}</a> : {{ product.price }} €
+          @switch (product.availabilityStatus) {
+            @case ('In Stock') {
+              <span>En stock</span>
+            }
+            @case ('Low Stock') {
+              <span>Plus que {{ product.stock }}</span>
+            }
+            @default {
+              <span>Rupture</span>
+            }
           }
-          @case ('Low Stock') {
-            <span>Plus que {{ product.stock }}</span>
-          }
-          @default {
-            <span>Rupture</span>
-          }
-        }
-      </li>
-    } @empty {
-      <li>Aucun produit à afficher</li>
+        </li>
+      } @empty {
+        <li>Aucun produit à afficher</li>
+      }
+    </ul>
+
+    @for (p of products(); track p.id) {
+      <app-product-card [product]="p" />
     }
-  </ul>
-
-  @for (p of products(); track p.id) {
-    <app-product-card [product]="p" />
   }
 </section>

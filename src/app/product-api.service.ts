@@ -12,4 +12,8 @@ export class ProductApiService {
     const response = await firstValueFrom(this.http.get<ProductsResponse>(`${this.url}?limit=12`)); // 12 produits sur 194
     return response.products; // le tableau, sorti de l'objet
   }
+
+  getById(id: number): Promise<Product> {
+    return firstValueFrom(this.http.get<Product>(`${this.url}/${id}`));
+  }
 }

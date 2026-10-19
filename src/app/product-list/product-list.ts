@@ -17,6 +17,8 @@ export class ProductList implements OnInit {
 
   products = signal<Product[]>([]); // vide, en attendant la réponse
   filter = signal<Filter>('all');
+  loading = signal(true); // on attend
+  error = signal<string | null>(null); // ça a raté
 
   visibleProducts = computed(() => {
     const products = this.products();
@@ -26,6 +28,12 @@ export class ProductList implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
-    this.products.set(await this.productApi.getAll());
+    try {
+      this.products.set(await this.productApi.getAll());
+    } catch {
+      this.error.set('Le catalogue est indisponible. Réessaie dans un instant.');
+    } finally {
+      this.loading.set(false); // qu'il ait réussi ou raté, on n'attend plus
+    }
   }
 }

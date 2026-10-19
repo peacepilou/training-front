@@ -1,4 +1,6 @@
-@if (product(); as p) {
+@if (loading()) {
+  <p>Chargement…</p>
+} @else if (product(); as p) {
   <article class="product-detail">
     <img [src]="p.thumbnail" [alt]="p.title" />
     <div>
