@@ -1,0 +1,31 @@
+/* téléphone d'abord : vignette à gauche, texte à droite, rien en largeur fixe sur le bloc */
+.cart {
+  padding: 0 24px; /* comme le catalogue */
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.line img {
+  width: 64px;
+  grid-row: span 3; /* la vignette tient la hauteur du titre, du calcul et du bouton */
+}
+
+.line p {
+  margin: 0;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.total {
+  font-size: 1.25rem;
+  font-weight: bold;
+}

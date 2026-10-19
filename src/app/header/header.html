@@ -6,6 +6,7 @@
   <button (click)="cart.clear()">Vider le panier</button>
   <nav>
     <a routerLink="/">Accueil</a>
+    <a routerLink="/cart">Panier</a>
     <a routerLink="/products/new">Ajouter un produit</a>
     <a routerLink="/account">Mon compte</a>
     @if (auth.isLoggedIn()) {

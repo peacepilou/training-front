@@ -1,0 +1,17 @@
+<section class="cart">
+  <h2>Ton panier</h2>
+  <!-- une ligne par produit : lines() regroupe par id, track aussi -->
+  @for (line of cart.lines(); track line.product.id) {
+    <div class="line">
+      <img [src]="line.product.thumbnail" [alt]="line.product.title" />
+      <p class="title">{{ line.product.title }}</p>
+      <p>{{ line.quantity }} × {{ line.product.price }} € = {{ (line.quantity * line.product.price).toFixed(2) }} €</p>
+      <!-- le composant demande, le service modifie -->
+      <button (click)="cart.removeOne(line.product)">Retirer un</button>
+    </div>
+  } @empty {
+    <p>Ton panier est vide.</p>
+  }
+  <!-- total calculé par le service sur tous les exemplaires : il tombe juste avec les sous-totaux -->
+  <p class="total">Total : {{ cart.total().toFixed(2) }} €</p>
+</section>
