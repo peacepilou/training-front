@@ -1,0 +1,12 @@
+<h2>Ajouter un produit</h2>
+
+<form>
+  <label for="title">Nom du produit</label>
+  <input id="title" [formField]="productForm.title" />
+
+  <label for="price">Prix (€)</label>
+  <input id="price" type="number" [formField]="productForm.price" />
+</form>
+
+<pre>{{ product() | json }}</pre>
+<p>Valide : {{ productForm().valid() }} · Touché : {{ productForm.title().touched() }} · Modifié : {{ productForm.title().dirty() }}</p>
