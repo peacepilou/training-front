@@ -1,6 +1,7 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '../models/product.model'; // nouveau : le header manipule des produits
+import { CartService } from '../cart.service';
 
 @Component({
   imports: [RouterLink], // le template de Header a le droit d'utiliser routerLink
@@ -9,6 +10,7 @@ import { Product } from '../models/product.model'; // nouveau : le header manipu
   templateUrl: './header.html',
 })
 export class Header {
+  cartService = inject(CartService);
   cart = input.required<Product[]>(); // remplace count
   clear = output<void>(); // void : l'événement ne transporte rien
 
