@@ -7,7 +7,20 @@
 
   <ul>
     @for (product of visibleProducts; track product.id) {
-      <li>{{ product.title }} : {{ product.price }} €</li>
+      <li>
+        {{ product.title }} : {{ product.price }} €
+        @switch (product.availabilityStatus) {
+          @case ('In Stock') {
+            <span>En stock</span>
+          }
+          @case ('Low Stock') {
+            <span>Plus que {{ product.stock }}</span>
+          }
+          @default {
+            <span>Rupture</span>
+          }
+        }
+      </li>
     } @empty {
       <li>Aucun produit à afficher</li>
     }
