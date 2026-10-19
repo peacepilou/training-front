@@ -1,12 +1,30 @@
-<h2>Ajouter un produit</h2>
+<section class="product-form">
+  <h2>Ajouter un produit</h2>
 
-<form>
-  <label for="title">Nom du produit</label>
-  <input id="title" [formField]="productForm.title" />
+  <form [formRoot]="productForm">
+    <label for="title">Nom du produit</label>
+    <input id="title" [formField]="productForm.title" />
+    @if (productForm.title().touched() && productForm.title().errors()[0]; as error) {
+      <p class="error">{{ error.message }}</p>
+    }
 
-  <label for="price">Prix (€)</label>
-  <input id="price" type="number" [formField]="productForm.price" />
-</form>
+    <label for="price">Prix (€)</label>
+    <input id="price" type="number" [formField]="productForm.price" />
+    @if (productForm.price().touched() && productForm.price().errors()[0]; as error) {
+      <p class="error">{{ error.message }}</p>
+    }
 
-<pre>{{ product() | json }}</pre>
-<p>Valide : {{ productForm().valid() }} · Touché : {{ productForm.title().touched() }} · Modifié : {{ productForm.title().dirty() }}</p>
+    <label for="stock">Stock</label>
+    <input id="stock" type="number" [formField]="productForm.stock" />
+    @if (productForm.stock().touched() && productForm.stock().errors()[0]; as error) {
+      <p class="error">{{ error.message }}</p>
+    }
+
+    <button type="submit">Ajouter</button>
+  </form>
+
+  @if (sent(); as product) {
+    <p>✅ Prêt à envoyer au serveur :</p>
+    <pre>{{ product | json }}</pre>
+  }
+</section>

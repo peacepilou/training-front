@@ -1,0 +1,19 @@
+.product-form {
+  padding: 0 24px;
+}
+
+.product-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+}
+
+.product-form button {
+  margin-top: 16px;
+}
+
+.error {
+  margin: 0;
+  color: #b3261e;
+}
