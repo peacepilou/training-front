@@ -8,9 +8,9 @@ export class ProductApiService {
   private readonly http = inject(HttpClient);
   private readonly url = 'https://dummyjson.com/products';
 
-  async getAll(): Promise<Product[]> {
-    const response = await firstValueFrom(this.http.get<ProductsResponse>(`${this.url}?limit=12`)); // 12 produits sur 194
-    return response.products; // le tableau, sorti de l'objet
+  // GET /products?limit=12&skip=24 : 12 produits, à partir du 25ᵉ, et le total
+  getPage(skip: number, limit: number): Promise<ProductsResponse> {
+    return firstValueFrom(this.http.get<ProductsResponse>(`${this.url}?limit=${limit}&skip=${skip}`));
   }
 
   getById(id: number): Promise<Product> {

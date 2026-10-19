@@ -23,6 +23,6 @@ export class ProductList implements OnInit {
   });
 
   ngOnInit(): void {
-    this.store.load();
+    this.store.goTo(this.store.page()); // la page en mémoire, ou la première
   }
 }

@@ -17,3 +17,10 @@
   vertical-align: top;
   background: #eee;
 }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 8px;
+}

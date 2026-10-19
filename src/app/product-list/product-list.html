@@ -38,5 +38,11 @@
     @for (p of store.products(); track p.id) {
       <app-product-card [product]="p" />
     }
+
+    <nav class="pagination" aria-label="Pages du catalogue">
+      <button (click)="store.goTo(store.page() - 1)" [disabled]="store.page() === 0">Précédent</button>
+      <span>Page {{ store.page() + 1 }} sur {{ store.pageCount() }}</span>
+      <button (click)="store.goTo(store.page() + 1)" [disabled]="store.page() + 1 === store.pageCount()">Suivant</button>
+    </nav>
   }
 </section>
