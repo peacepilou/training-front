@@ -1,8 +1,8 @@
 <article class="product-card">
-  <img [src]="product.thumbnail" [alt]="product.title" />
-  <h3>{{ product.title }}</h3>
-  <p>{{ product.price }} €</p>
-  @if (product.stock === 0) {
+  <img [src]="product().thumbnail" [alt]="product().title" />
+  <h3>{{ product().title }}</h3>
+  <p>{{ product().price }} €</p>
+  @if (product().stock === 0) {
     <p>Victime de son succès</p>
   } @else {
     <button (click)="addToCart()">Ajouter au panier</button>
