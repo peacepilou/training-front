@@ -1,0 +1,13 @@
+.product-card {
+  display: inline-block;
+  width: 180px;
+  margin: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  vertical-align: top;
+}
+
+.product-card img {
+  width: 100%;
+}
