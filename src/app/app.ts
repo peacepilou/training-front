@@ -2,6 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { CartService } from './cart.service';
+import { LoadingService } from './loading.service';
 
 @Component({
   imports: [RouterOutlet, RouterLink, Header],
@@ -13,6 +14,7 @@ export class App {
   protected readonly title = signal('training-front');
 
   cart = inject(CartService);
+  loading = inject(LoadingService);
 
   constructor() {
     effect(() => {

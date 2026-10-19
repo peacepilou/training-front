@@ -5,3 +5,15 @@
 .error {
   color: var(--color-error);
 }
+
+/* la forme d'une carte, grise, en attendant la vraie */
+.skeleton {
+  display: inline-block;
+  width: 180px;
+  height: 280px;
+  margin: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  vertical-align: top;
+  background: #eee;
+}

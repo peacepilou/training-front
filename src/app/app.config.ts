@@ -3,11 +3,12 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { authInterceptor } from './auth-interceptor';
+import { loadingInterceptor } from './loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()), // les paramètres de l'adresse vont dans les inputs du même nom
-    provideHttpClient(withInterceptors([authInterceptor])), // HttpClient, avec ses interceptors
+    provideHttpClient(withInterceptors([loadingInterceptor, authInterceptor])), // HttpClient, avec ses interceptors
   ]
 };
