@@ -1,59 +1,68 @@
-# TrainingFront
+# training-front
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Le projet Angular d'entraînement du module Angular : le front d'une boutique, branché sur DummyJSON, l'API d'entraînement du cours. Chaque chapitre qui fait écrire du code a sa branche, et chaque branche part de la précédente.
 
-## Development server
+## À quoi il te sert
 
-To start a local development server, run:
+Tu écris ton propre `training-front` en suivant le cours. Celui-ci est le mien, au même point, chapitre par chapitre.
+
+À la fin d'un chapitre, ouvre la vue « Compare » de GitHub entre la branche du chapitre précédent et celle du chapitre. Elle te montre, fichier par fichier, tout ce que le chapitre change. Pour le chapitre 05 :
+
+https://github.com/peacepilou/training-front/compare/chapitre-04...chapitre-05
+
+Compare ensuite avec ce que tu as écrit. Une différence de nom, un type de retour oublié, un fichier en trop : tu la vois tout de suite.
+
+Les fichiers `.spec.ts` sont ceux que génère le CLI, complétés pour que `ng test` passe à chaque chapitre. Le chapitre 13 t'apprend à faire de même chez toi, puis à écrire de vrais tests.
+
+## Ce qu'il te faut
+
+- Node 22.22.3, 24.15.0 ou 26.0.0 au minimum : dans ton terminal, `node --version`.
+- Le CLI Angular 22 : `npm install -g @angular/cli@22`.
+
+## Le lancer
 
 ```bash
+git clone https://github.com/peacepilou/training-front.git
+cd training-front
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'app répond sur `http://localhost:4200`. Pour l'arrêter : `Ctrl + C`.
 
-## Code scaffolding
+Les tests : `ng test`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Une branche par chapitre
 
 ```bash
-ng generate --help
+git switch chapitre-05
 ```
 
-## Building
+| Branche | Chapitre |
+|---|---|
+| `chapitre-02` (et `main`) | Le CLI Angular : ng new, ng serve, ng build |
+| `chapitre-03` | Créer des composants et leurs templates |
+| `chapitre-04` | input() et output() : faire communiquer deux composants |
+| `chapitre-05` | Les signals : signal, computed, effect |
+| `chapitre-06` | Le Router : routes, routerLink, guards |
+| `chapitre-07` | Services et injection de dépendances |
+| `chapitre-08` | Formulaires et validation avec les Signal Forms |
+| `chapitre-09` | HttpClient et Observables : appeler une API |
+| `chapitre-10` | Authentification : token, interceptor, localStorage |
+| `chapitre-11` | Coder Angular avec l'IA : skills, MCP, relecture |
+| `chapitre-12` | Bonus : @defer, lazy loading, Cypress |
+| `chapitre-13` | Tester un composant et un service |
 
-To build the project run:
+Au chapitre 12, relance `npm install` : la branche ajoute Cypress. Ses tests se lancent avec `npx cypress run`, pendant que `ng serve` tourne dans un autre terminal.
+
+## Repartir d'un chapitre
+
+Ton chapitre précédent n'est pas fini ? Pars de sa branche, et continue sur une branche à toi :
 
 ```bash
-ng build
+git switch chapitre-04
+git switch -c ma-suite
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Pour envoyer ce code sur ton dépôt GitHub : `git remote set-url origin <l'adresse de ton dépôt>`, puis `git push -u origin ma-suite`.
