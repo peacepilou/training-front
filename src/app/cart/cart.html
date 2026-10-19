@@ -14,4 +14,11 @@
   }
   <!-- total calculé par le service sur tous les exemplaires : il tombe juste avec les sous-totaux -->
   <p class="total" aria-live="polite">Total : {{ cart.total().toFixed(2) }} €</p>
+  <button (click)="onCheckout()">Commander</button>
+  @if (order(); as o) {
+    <p role="status">✅ Commande n° {{ o.id }} : {{ o.totalQuantity }} article(s), {{ o.total }} €.</p>
+  }
+  @if (error(); as message) {
+    <p class="error" role="alert">{{ message }}</p>
+  }
 </section>
