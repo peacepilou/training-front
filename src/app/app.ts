@@ -9,4 +9,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('training-front');
+
+  cartCount = 0;
+
+  addToCart(): void {
+    this.cartCount = this.cartCount + 1;
+  }
 }
