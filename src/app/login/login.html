@@ -1,2 +1,24 @@
-<h2>Connexion</h2>
-<p>Connecte-toi pour voir ton compte.</p>
+<section class="login">
+  <h2>Connexion</h2>
+  <p>Pour t'entraîner : emilys / emilyspass</p>
+
+  <form [formRoot]="loginForm">
+    <label for="username">Identifiant</label>
+    <input id="username" [formField]="loginForm.username" />
+    @if (loginForm.username().touched() && loginForm.username().errors()[0]; as error) {
+      <p class="error">{{ error.message }}</p>
+    }
+
+    <label for="password">Mot de passe</label>
+    <input id="password" type="password" [formField]="loginForm.password" />
+    @if (loginForm.password().touched() && loginForm.password().errors()[0]; as error) {
+      <p class="error">{{ error.message }}</p>
+    }
+
+    @if (error(); as message) {
+      <p class="error">{{ message }}</p>
+    }
+
+    <button type="submit">Se connecter</button>
+  </form>
+</section>

@@ -1,0 +1,19 @@
+.login {
+  padding: 0 24px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+}
+
+.login button {
+  margin-top: 16px;
+}
+
+.error {
+  margin: 0;
+  color: #b3261e;
+}
