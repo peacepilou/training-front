@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './header.css',
   templateUrl: './header.html',
 })
-export class Header {}
+export class Header {
+  count = input.required<number>();
+}

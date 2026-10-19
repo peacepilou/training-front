@@ -1,3 +1,3 @@
-<app-header />
-<app-product-list />
+<app-header [count]="cart.length" />
+<app-product-list (addToCart)="onAdd($event)" />
 <router-outlet />
