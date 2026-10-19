@@ -1,7 +1,7 @@
 import { Service, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { LoginResponse } from './models/user.model';
+import { LoginResponse, User } from './models/user.model';
 
 @Service()
 export class AuthService {
@@ -20,5 +20,9 @@ export class AuthService {
 
   logout(): void {
     this.token.set(null);
+  }
+
+  me(): Promise<User> {
+    return firstValueFrom(this.http.get<User>(`${this.url}/me`));
   }
 }

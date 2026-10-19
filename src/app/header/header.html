@@ -8,5 +8,8 @@
     <a routerLink="/">Accueil</a>
     <a routerLink="/products/new">Ajouter un produit</a>
     <a routerLink="/account">Mon compte</a>
+    @if (auth.isLoggedIn()) {
+      <button (click)="onLogout()">Se déconnecter</button>
+    }
   </nav>
 </header>

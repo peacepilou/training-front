@@ -6,3 +6,12 @@ export type LoginResponse = {
   accessToken: string;
   refreshToken: string;
 };
+
+// GET /auth/me : la personne connectée
+export type User = {
+  id: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};

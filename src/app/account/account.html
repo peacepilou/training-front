@@ -1,2 +1,7 @@
 <h2>Mon compte</h2>
-<p>Tes commandes et ton adresse de livraison.</p>
+@if (user(); as u) {
+  <p>Bonjour {{ u.firstName }} {{ u.lastName }} 👋</p>
+  <p>Ton adresse : {{ u.email }}</p>
+} @else {
+  <p>Chargement…</p>
+}
