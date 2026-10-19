@@ -18,4 +18,8 @@ export class App {
   onAdd(product: Product): void {
     this.cart = [...this.cart, product]; // un nouveau tableau : l'ancien + ce produit
   }
+
+  onClear(): void {
+    this.cart = [];
+  }
 }

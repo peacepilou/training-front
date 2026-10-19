@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   imports: [],
@@ -8,4 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class Header {
   count = input.required<number>();
+  clear = output<void>(); // void : l'événement ne transporte rien
 }
