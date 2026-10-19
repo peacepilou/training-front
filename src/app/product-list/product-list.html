@@ -27,6 +27,10 @@
   </ul>
 
   @for (p of products; track p.id) {
-    <app-product-card [product]="p" (addToCart)="addToCart.emit($event)" />
+    <app-product-card
+      [product]="p"
+      [quantity]="quantityOf(p)"
+      (addToCart)="addToCart.emit($event)"
+    />
   }
 </section>

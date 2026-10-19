@@ -20,6 +20,7 @@ describe('ProductCard', () => {
       stock: 99,
       availabilityStatus: 'In Stock',
     });
+    fixture.componentRef.setInput('quantity', 0);
     await fixture.whenStable();
   });
 

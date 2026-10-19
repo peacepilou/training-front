@@ -9,11 +9,10 @@ import { Product } from '../models/product.model';
 })
 export class ProductCard {
   product = input.required<Product>(); // « donne-moi un Product, obligatoirement »
+  quantity = input.required<number>();
   addToCart = output<Product>(); // l'événement transportera un Product
-  cartCount = 0;
 
   onAddClick(): void {
-    this.cartCount = this.cartCount + 1;
     this.addToCart.emit(this.product()); // envoie le produit de cette carte
   }
 }
