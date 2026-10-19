@@ -8,7 +8,7 @@ export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly url = 'https://dummyjson.com/auth';
 
-  readonly token = signal<string | null>(null);
+  readonly token = signal<string | null>(localStorage.getItem('token')); // relu au démarrage
   readonly isLoggedIn = computed(() => this.token() !== null);
 
   async login(username: string, password: string): Promise<void> {
@@ -16,10 +16,12 @@ export class AuthService {
       this.http.post<LoginResponse>(`${this.url}/login`, { username, password }),
     );
     this.token.set(response.accessToken);
+    localStorage.setItem('token', response.accessToken);
   }
 
   logout(): void {
     this.token.set(null);
+    localStorage.removeItem('token');
   }
 
   me(): Promise<User> {
