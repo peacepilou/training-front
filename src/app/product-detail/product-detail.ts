@@ -1,6 +1,5 @@
-import { Component, OnInit, inject, input, signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CartService } from '../cart.service';
-import { ProductApiService } from '../product-api.service';
 import { Product } from '../models/product.model';
 import { ProductReviews } from '../product-reviews/product-reviews';
 
@@ -10,21 +9,7 @@ import { ProductReviews } from '../product-reviews/product-reviews';
   styleUrl: './product-detail.css',
   templateUrl: './product-detail.html',
 })
-export class ProductDetail implements OnInit {
-  private readonly productApi = inject(ProductApiService);
+export class ProductDetail {
   cart = inject(CartService);
-  id = input.required<string>(); // le :id de l'adresse, toujours du texte
-
-  product = signal<Product | undefined>(undefined);
-  loading = signal(true);
-
-  async ngOnInit(): Promise<void> {
-    try {
-      this.product.set(await this.productApi.getById(Number(this.id())));
-    } catch {
-      this.product.set(undefined); // 404, ou réseau coupé : le @else affiche « Produit introuvable »
-    } finally {
-      this.loading.set(false);
-    }
-  }
+  product = input<Product | null>(); // fourni par le resolver, avant l'affichage
 }

@@ -6,6 +6,7 @@ import { Account } from './account/account';
 import { authGuard } from './auth-guard';
 import { Cart } from './cart/cart';
 import { LegalNotice } from './legal-notice/legal-notice';
+import { productResolver } from './product-resolver';
 
 export const routes: Routes = [
   { path: '', component: Home },      // l'adresse vide : localhost:4200/
@@ -13,7 +14,7 @@ export const routes: Routes = [
     path: 'products/new',
     loadComponent: () => import('./product-form/product-form').then((m) => m.ProductForm), // chargé au premier passage
   },
-  { path: 'products/:id', component: ProductDetail },
+  { path: 'products/:id', component: ProductDetail, resolve: { product: productResolver } },
   { path: 'cart', component: Cart },
   { path: 'login', loadComponent: () => import('./login/login').then((m) => m.Login) },
   { path: 'account', component: Account, canActivate: [authGuard] },
