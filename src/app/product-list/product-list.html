@@ -1,12 +1,12 @@
 <section class="product-list">
   <h2>Nos produits</h2>
 
-  <button (click)="showAll()">Tous</button>
-  <button (click)="showInStock()">Disponibles</button>
-  <button (click)="showLuxury()">Plus de 1 000 €</button>
+  <button (click)="filter.set('all')">Tous</button>
+  <button (click)="filter.set('inStock')">Disponibles</button>
+  <button (click)="filter.set('luxury')">Plus de 1 000 €</button>
 
   <ul>
-    @for (product of visibleProducts; track product.id) {
+    @for (product of visibleProducts(); track product.id) {
       <li>
         <a [routerLink]="['/products', product.id]">{{ product.title }}</a> : {{ product.price }} €
         @switch (product.availabilityStatus) {
@@ -26,7 +26,7 @@
     }
   </ul>
 
-  @for (p of products; track p.id) {
+  @for (p of products(); track p.id) {
     <app-product-card [product]="p" />
   }
 </section>

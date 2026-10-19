@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ProductCard } from '../product-card/product-card';
 import { Product } from '../models/product.model';
-import { catalog } from '../data/catalog';
+import { ProductApiService } from '../product-api.service';
+
+type Filter = 'all' | 'inStock' | 'luxury';
 
 @Component({
   imports: [ProductCard, RouterLink],
@@ -10,19 +12,20 @@ import { catalog } from '../data/catalog';
   styleUrl: './product-list.css',
   templateUrl: './product-list.html',
 })
-export class ProductList {
-  products: Product[] = catalog;
-  visibleProducts: Product[] = catalog;
+export class ProductList implements OnInit {
+  private readonly productApi = inject(ProductApiService);
 
-  showAll(): void {
-    this.visibleProducts = this.products;
-  }
+  products = signal<Product[]>([]); // vide, en attendant la réponse
+  filter = signal<Filter>('all');
 
-  showInStock(): void {
-    this.visibleProducts = this.products.filter((product) => product.stock > 0);
-  }
+  visibleProducts = computed(() => {
+    const products = this.products();
+    if (this.filter() === 'inStock') return products.filter((product) => product.stock > 0);
+    if (this.filter() === 'luxury') return products.filter((product) => product.price > 1000);
+    return products;
+  });
 
-  showLuxury(): void {
-    this.visibleProducts = this.products.filter((product) => product.price > 1000);
+  async ngOnInit(): Promise<void> {
+    this.products.set(await this.productApi.getAll());
   }
 }
