@@ -5,7 +5,7 @@
   @if (product().stock === 0) {
     <p>Victime de son succès</p>
   } @else {
-    <button (click)="onAddClick()">Ajouter au panier</button>
+    <button (click)="cart.add(product())">Ajouter au panier</button>
   }
-  <p>Dans ton panier : {{ quantity() }}</p>
+  <p>Dans ton panier : {{ cart.quantityOf(product()) }}</p>
 </article>

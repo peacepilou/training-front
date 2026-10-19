@@ -1,9 +1,9 @@
 <header class="header">
   <h1>Training Shop</h1>
   <p>Le catalogue d'entraînement</p>
-  <p>🛒 {{ count() }} article(s) · {{ total().toFixed(2) }} €</p>
+  <p>🛒 {{ cart.count() }} article(s) · {{ cart.total().toFixed(2) }} €</p>
   <p>{{ shipping() }}</p>
-  <button (click)="clear.emit()">Vider le panier</button>
+  <button (click)="cart.clear()">Vider le panier</button>
   <nav>
     <a routerLink="/">Accueil</a>
     <a routerLink="/account">Mon compte</a>
