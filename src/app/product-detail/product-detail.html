@@ -11,6 +11,13 @@
       <p>Dans ton panier : {{ cart.quantityOf(p) }}</p>
     </div>
   </article>
+  @if (p.reviews; as reviews) {
+    @defer (on viewport) {
+      <app-product-reviews [reviews]="reviews" />
+    } @placeholder {
+      <p>Les avis clients arrivent…</p>
+    }
+  }
 } @else {
   <h2>Produit introuvable</h2>
 }

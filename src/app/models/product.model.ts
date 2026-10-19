@@ -1,3 +1,9 @@
+export type Review = {
+  rating: number;
+  comment: string;
+  reviewerName: string;
+};
+
 export type Product = {
   id: number;
   title: string;
@@ -5,6 +11,7 @@ export type Product = {
   thumbnail: string;
   stock: number;
   availabilityStatus: 'In Stock' | 'Low Stock' | 'Out of Stock';
+  reviews?: Review[]; // absent dans la réponse d'un POST
 };
 
 // GET /products : la liste arrive rangée dans un objet

@@ -1,0 +1,6 @@
+<section class="reviews">
+  <h3>Avis clients</h3>
+  @for (review of reviews(); track $index) {
+    <p>{{ '★'.repeat(review.rating) }} « {{ review.comment }} », {{ review.reviewerName }}</p>
+  }
+</section>

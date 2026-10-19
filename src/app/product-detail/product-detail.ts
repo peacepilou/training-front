@@ -2,9 +2,10 @@ import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { CartService } from '../cart.service';
 import { ProductApiService } from '../product-api.service';
 import { Product } from '../models/product.model';
+import { ProductReviews } from '../product-reviews/product-reviews';
 
 @Component({
-  imports: [],
+  imports: [ProductReviews],
   selector: 'app-product-detail',
   styleUrl: './product-detail.css',
   templateUrl: './product-detail.html',
