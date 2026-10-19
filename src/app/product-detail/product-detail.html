@@ -5,6 +5,8 @@
       <h2>{{ p.title }}</h2>
       <p>{{ p.price }} €</p>
       <p>Stock : {{ p.stock }}</p>
+      <button (click)="cart.add(p)">Ajouter au panier</button>
+      <p>Dans ton panier : {{ cart.quantityOf(p) }}</p>
     </div>
   </article>
 } @else {
