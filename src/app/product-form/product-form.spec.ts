@@ -22,4 +22,17 @@ describe('ProductForm', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('refuse un nom trop court, un prix nul et un stock décimal', () => {
+    component.product.set({ title: 'Ta', price: 0, stock: 2.5 });
+    expect(component.productForm.title().errors()[0].kind).toBe('minLength');
+    expect(component.productForm.price().errors()[0].kind).toBe('min');
+    expect(component.productForm.stock().errors()[0].kind).toBe('wholeNumber');
+    expect(component.productForm().valid()).toBe(false);
+  });
+
+  it('accepte un produit juste', () => {
+    component.product.set({ title: 'Tacos al pastor', price: 6.5, stock: 40 });
+    expect(component.productForm().valid()).toBe(true);
+  });
 });
