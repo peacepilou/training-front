@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Account } from './account';
-import { provideRouter } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('Account', () => {
   let component: Account;
@@ -21,5 +22,20 @@ describe('Account', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('déconnecte et renvoie vers /login quand le token a expiré', async () => {
+    const auth = TestBed.inject(AuthService);
+    auth.token.set('le-token-d-hier');
+    const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl').mockResolvedValue(true); // on note la navigation, sans la faire
+
+    // ngOnInit a demandé /auth/me à la création : le faux serveur répond « expiré »
+    TestBed.inject(HttpTestingController)
+      .expectOne('https://dummyjson.com/auth/me')
+      .flush({ message: 'Token Expired!' }, { status: 401, statusText: 'Unauthorized' });
+
+    await expect.poll(() => navigate.mock.calls.length).toBe(1);
+    expect(navigate).toHaveBeenCalledWith('/login');
+    expect(auth.token()).toBeNull();
   });
 });
