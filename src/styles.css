@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* Les couleurs de l'app, à un seul endroit : chaque composant les lit par leur nom */
+:root {
+  --color-background: #ffffff;
+  --color-text: #222222;
+  --color-primary: #ee8b8b; /* fond du bandeau : jamais du texte blanc dessus, 2,41:1 */
+  --color-error: #b3261e;
+  --color-accent: #7a31ca; /* décoration seulement */
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Le focus se voit partout, souris ou clavier */
+:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}

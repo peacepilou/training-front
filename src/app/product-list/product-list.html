@@ -4,7 +4,7 @@
   @if (loading()) {
     <p>Chargement du catalogue…</p>
   } @else if (error(); as message) {
-    <p class="error">{{ message }}</p>
+    <p class="error" role="alert">{{ message }}</p>
   } @else {
     <button (click)="filter.set('all')">Tous</button>
     <button (click)="filter.set('inStock')">Disponibles</button>

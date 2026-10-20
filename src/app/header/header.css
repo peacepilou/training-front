@@ -1,10 +1,10 @@
 .header {
   padding: 16px 24px;
-  background-color: #ee8b8b;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .header a {
   margin-right: 16px;
-  color: white;
+  color: var(--color-text);
 }

@@ -21,14 +21,14 @@
     }
 
     @if (error(); as message) {
-      <p class="error">{{ message }}</p>
+      <p class="error" role="alert">{{ message }}</p>
     }
 
     <button type="submit">Ajouter</button>
   </form>
 
   @if (created(); as product) {
-    <p>✅ DummyJSON a créé « {{ product.title }} », avec l'id {{ product.id }}.</p>
+    <p role="status">✅ DummyJSON a créé « {{ product.title }} », avec l'id {{ product.id }}.</p>
     <pre>{{ product | json }}</pre>
   }
 </section>

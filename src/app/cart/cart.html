@@ -13,5 +13,5 @@
     <p>Ton panier est vide.</p>
   }
   <!-- total calculé par le service sur tous les exemplaires : il tombe juste avec les sous-totaux -->
-  <p class="total">Total : {{ cart.total().toFixed(2) }} €</p>
+  <p class="total" aria-live="polite">Total : {{ cart.total().toFixed(2) }} €</p>
 </section>
