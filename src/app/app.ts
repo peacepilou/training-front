@@ -1,10 +1,10 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { CartService } from './cart.service';
 
 @Component({
-  imports: [RouterOutlet, Header],
+  imports: [RouterOutlet, RouterLink, Header],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
