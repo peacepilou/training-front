@@ -5,32 +5,25 @@
 FROM node:24-alpine AS build
 WORKDIR /app
 
-# Copie uniquement les fichiers nécessaires pour installer les dépendances, versions exactes du package-lock.json
-# (les chemins partent du contexte de build, le « . » de docker build, pas du dossier docker/)
+# D'abord les fichiers de dépendances, seuls
 COPY package*.json ./
 RUN npm ci
 
-# Copie du reste du projet Angular
+# Puis le reste du projet
 COPY . ./
-
-# Build de l’application en mode production (par défaut)
 RUN npm run build
 
 
 # ============================
-# ÉTAPE 2 : Serveur NGINX
+# ÉTAPE 2 : Serveur nginx
 # ============================
 FROM nginx:1.30-alpine
 
-# Copie de la configuration NGINX personnalisée
+# Remplace la configuration par défaut de nginx
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copie du build Angular depuis l’étape précédente
+# Copie du build Angular depuis l'étape précédente
 WORKDIR /usr/share/nginx/html
 COPY --from=build /app/dist/training-front/browser ./
 
-# Expose le port 80, pas obligatoire mais permet de documenter
 EXPOSE 80
-
-# Lancement du serveur NGINX, idem pas obligatoire car nginx le fait par défaut
-CMD ["nginx", "-g", "daemon off;"]

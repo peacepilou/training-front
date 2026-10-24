@@ -1,11 +1,6 @@
-# Lu à la racine du contexte de build (le « . » de docker build), pas à côté du Dockerfile
-# Empêche Docker de copier ces fichiers/dossiers dans le build
 node_modules
 .angular
 .git
-.gitignore
-Dockerfile
-docker-compose.yml
 dist/
 *.md
 *.log
