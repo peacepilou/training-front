@@ -5,10 +5,10 @@
 FROM node:24-alpine AS build
 WORKDIR /app
 
-# Copie uniquement les fichiers nécessaires pour installer les dépendances
+# Copie uniquement les fichiers nécessaires pour installer les dépendances, versions exactes du package-lock.json
 # (les chemins partent du contexte de build, le « . » de docker build, pas du dossier docker/)
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 # Copie du reste du projet Angular
 COPY . ./
