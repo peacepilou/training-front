@@ -20,7 +20,7 @@ RUN npm run build
 # ============================
 # ÉTAPE 2 : Serveur NGINX
 # ============================
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine
 
 # Copie de la configuration NGINX personnalisée
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
