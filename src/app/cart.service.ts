@@ -27,7 +27,6 @@ export class CartService {
   }
 
   clear(): void {
-    const unused = 0;
     this.items.set([]);
   }
 
