@@ -15,7 +15,7 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      // convention du projet : type pour les données, interface pour un contrat implémenté par une classe
+      // convention du projet : type plutôt qu'interface pour décrire les données
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@angular-eslint/directive-selector': [
         'error',
