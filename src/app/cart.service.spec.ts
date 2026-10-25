@@ -10,6 +10,6 @@ describe('CartService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(service.count()).toBe(1);
   });
 });
