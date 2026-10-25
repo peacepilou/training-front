@@ -1,4 +1,4 @@
-name: CI Pipeline for Angular
+name: CI Front
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   lint:
-    name: Lint
+    name: Front Lint
     runs-on: ubuntu-latest
     env:
       CYPRESS_INSTALL_BINARY: 0 # ce job n'a pas besoin du navigateur de Cypress
@@ -35,7 +35,7 @@ jobs:
         run: npm run lint
 
   unit-tests:
-    name: Unit Tests
+    name: Front Unit Tests
     runs-on: ubuntu-latest
     env:
       CYPRESS_INSTALL_BINARY: 0
@@ -57,7 +57,7 @@ jobs:
         run: npm run test:ci
 
   build:
-    name: Build
+    name: Front Build
     runs-on: ubuntu-latest
     env:
       CYPRESS_INSTALL_BINARY: 0
@@ -79,7 +79,7 @@ jobs:
         run: npm run build
 
   e2e-tests:
-    name: E2E Tests
+    name: Front E2E Tests
     runs-on: ubuntu-latest
     needs: [lint, unit-tests, build]
     if: github.event_name == 'pull_request' && github.base_ref == 'main'
