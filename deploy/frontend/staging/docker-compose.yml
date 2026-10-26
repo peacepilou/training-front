@@ -1,4 +1,4 @@
-# Modèle du fichier à poser sur le VPS, dans ~/frontend/staging/ : deploy.sh y lance docker compose pull, puis up -d.
+# Modèle du fichier à poser sur le VPS, dans ~/frontend/staging/ : deploy.sh y lance docker compose pull, puis up -d --wait.
 # DOMAINE FACTICE : remplace example.com par le domaine de ton équipe.
 name: frontend-staging # sans lui, le projet prendrait le nom du dossier, « staging », comme celui du back
 
@@ -6,6 +6,12 @@ services:
   frontend:
     image: ghcr.io/peacepilou/training-front:staging # poussée par cd-front.yml
     restart: unless-stopped
+    # deploy.sh attend ce test : s'il échoue, le déploiement finit en rouge
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO /dev/null http://127.0.0.1/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     networks:
       - traefik
     labels:
