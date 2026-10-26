@@ -2,11 +2,12 @@ import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { NewProduct, Product, ProductsResponse } from './models/product.model';
+import { environment } from '../environments/environment';
 
 @Service()
 export class ProductApiService {
   private readonly http = inject(HttpClient);
-  private readonly url = 'https://dummyjson.com/products';
+  private readonly url = `${environment.apiUrl}/products`;
 
   // GET /products?limit=12&skip=24 : 12 produits, à partir du 25ᵉ, et le total
   getPage(skip: number, limit: number): Promise<ProductsResponse> {

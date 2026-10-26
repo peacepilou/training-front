@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { environment } from '../../environments/environment';
 
 describe('Account', () => {
   let component: Account;
@@ -31,7 +32,7 @@ describe('Account', () => {
 
     // ngOnInit a demandé /auth/me à la création : le faux serveur répond « expiré »
     TestBed.inject(HttpTestingController)
-      .expectOne('https://dummyjson.com/auth/me')
+      .expectOne(`${environment.apiUrl}/auth/me`)
       .flush({ message: 'Token Expired!' }, { status: 401, statusText: 'Unauthorized' });
 
     await expect.poll(() => navigate.mock.calls.length).toBe(1);

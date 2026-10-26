@@ -4,6 +4,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { firstValueFrom } from 'rxjs';
 import { authInterceptor } from './auth-interceptor';
 import { AuthService } from './auth.service';
+import { environment } from '../environments/environment';
 
 describe('authInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
@@ -29,8 +30,8 @@ describe('authInterceptor', () => {
   });
 
   it('joint le token aux requêtes vers DummyJSON', async () => {
-    const promise = firstValueFrom(http.get('https://dummyjson.com/auth/me'));
-    const request = server.expectOne('https://dummyjson.com/auth/me');
+    const promise = firstValueFrom(http.get(`${environment.apiUrl}/auth/me`));
+    const request = server.expectOne(`${environment.apiUrl}/auth/me`);
     expect(request.request.headers.get('Authorization')).toBe('Bearer un-token');
     request.flush({});
     await promise;

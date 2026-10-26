@@ -2,11 +2,12 @@ import { Service, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { LoginResponse, User } from './models/user.model';
+import { environment } from '../environments/environment';
 
 @Service()
 export class AuthService {
   private readonly http = inject(HttpClient);
-  private readonly url = 'https://dummyjson.com/auth';
+  private readonly url = `${environment.apiUrl}/auth`;
 
   readonly token = signal<string | null>(localStorage.getItem('token')); // relu au démarrage
   readonly isLoggedIn = computed(() => this.token() !== null);
