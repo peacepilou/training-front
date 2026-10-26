@@ -11,7 +11,10 @@ RUN npm ci
 
 # Puis le reste du projet
 COPY . ./
-RUN npm run build
+
+# La configuration Angular à builder : production par défaut, ou staging avec --build-arg CONFIGURATION=staging
+ARG CONFIGURATION=production
+RUN npm run build -- --configuration=$CONFIGURATION
 
 
 # ============================
